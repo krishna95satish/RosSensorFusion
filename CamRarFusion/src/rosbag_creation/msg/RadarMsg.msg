@@ -1,0 +1,9 @@
+string vName
+int16 frame
+float64 radarRange
+float64 radarAngle
+int64 camTick
+int64 radarTick
+float64 lateralDist
+int8 targetID
+int8 dataConfidence
