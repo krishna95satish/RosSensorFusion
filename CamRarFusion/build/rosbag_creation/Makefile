@@ -168,6 +168,21 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
+rosbag_creation/CMakeFiles/CameraPublisher.dir/rule:
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f CMakeFiles/Makefile2 rosbag_creation/CMakeFiles/CameraPublisher.dir/rule
+.PHONY : rosbag_creation/CMakeFiles/CameraPublisher.dir/rule
+
+# Convenience name for target.
+CameraPublisher: rosbag_creation/CMakeFiles/CameraPublisher.dir/rule
+
+.PHONY : CameraPublisher
+
+# fast build rule for target.
+CameraPublisher/fast:
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/CameraPublisher.dir/build.make rosbag_creation/CMakeFiles/CameraPublisher.dir/build
+.PHONY : CameraPublisher/fast
+
+# Convenience name for target.
 rosbag_creation/CMakeFiles/rosbag_creation_genpy.dir/rule:
 	cd /home/kpit/CamRarFusion/build && $(MAKE) -f CMakeFiles/Makefile2 rosbag_creation/CMakeFiles/rosbag_creation_genpy.dir/rule
 .PHONY : rosbag_creation/CMakeFiles/rosbag_creation_genpy.dir/rule
@@ -348,19 +363,19 @@ sensor_msgs_generate_messages_eus/fast:
 .PHONY : sensor_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
-rosbag_creation/CMakeFiles/CamPub.dir/rule:
-	cd /home/kpit/CamRarFusion/build && $(MAKE) -f CMakeFiles/Makefile2 rosbag_creation/CMakeFiles/CamPub.dir/rule
-.PHONY : rosbag_creation/CMakeFiles/CamPub.dir/rule
+rosbag_creation/CMakeFiles/RadarPublisher.dir/rule:
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f CMakeFiles/Makefile2 rosbag_creation/CMakeFiles/RadarPublisher.dir/rule
+.PHONY : rosbag_creation/CMakeFiles/RadarPublisher.dir/rule
 
 # Convenience name for target.
-CamPub: rosbag_creation/CMakeFiles/CamPub.dir/rule
+RadarPublisher: rosbag_creation/CMakeFiles/RadarPublisher.dir/rule
 
-.PHONY : CamPub
+.PHONY : RadarPublisher
 
 # fast build rule for target.
-CamPub/fast:
-	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/CamPub.dir/build.make rosbag_creation/CMakeFiles/CamPub.dir/build
-.PHONY : CamPub/fast
+RadarPublisher/fast:
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/RadarPublisher.dir/build.make rosbag_creation/CMakeFiles/RadarPublisher.dir/build
+.PHONY : RadarPublisher/fast
 
 # Convenience name for target.
 rosbag_creation/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/rule:
@@ -708,21 +723,6 @@ rosgraph_msgs_generate_messages_lisp/fast:
 .PHONY : rosgraph_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
-rosbag_creation/CMakeFiles/RadarPub.dir/rule:
-	cd /home/kpit/CamRarFusion/build && $(MAKE) -f CMakeFiles/Makefile2 rosbag_creation/CMakeFiles/RadarPub.dir/rule
-.PHONY : rosbag_creation/CMakeFiles/RadarPub.dir/rule
-
-# Convenience name for target.
-RadarPub: rosbag_creation/CMakeFiles/RadarPub.dir/rule
-
-.PHONY : RadarPub
-
-# fast build rule for target.
-RadarPub/fast:
-	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/RadarPub.dir/build.make rosbag_creation/CMakeFiles/RadarPub.dir/build
-.PHONY : RadarPub/fast
-
-# Convenience name for target.
 rosbag_creation/CMakeFiles/std_srvs_generate_messages_nodejs.dir/rule:
 	cd /home/kpit/CamRarFusion/build && $(MAKE) -f CMakeFiles/Makefile2 rosbag_creation/CMakeFiles/std_srvs_generate_messages_nodejs.dir/rule
 .PHONY : rosbag_creation/CMakeFiles/std_srvs_generate_messages_nodejs.dir/rule
@@ -873,6 +873,21 @@ topic_tools_generate_messages_py/fast:
 .PHONY : topic_tools_generate_messages_py/fast
 
 # Convenience name for target.
+rosbag_creation/CMakeFiles/FusionNode.dir/rule:
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f CMakeFiles/Makefile2 rosbag_creation/CMakeFiles/FusionNode.dir/rule
+.PHONY : rosbag_creation/CMakeFiles/FusionNode.dir/rule
+
+# Convenience name for target.
+FusionNode: rosbag_creation/CMakeFiles/FusionNode.dir/rule
+
+.PHONY : FusionNode
+
+# fast build rule for target.
+FusionNode/fast:
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/FusionNode.dir/build.make rosbag_creation/CMakeFiles/FusionNode.dir/build
+.PHONY : FusionNode/fast
+
+# Convenience name for target.
 rosbag_creation/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule:
 	cd /home/kpit/CamRarFusion/build && $(MAKE) -f CMakeFiles/Makefile2 rosbag_creation/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
 .PHONY : rosbag_creation/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
@@ -902,62 +917,92 @@ rosbag_creation_generate_messages/fast:
 	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/rosbag_creation_generate_messages.dir/build.make rosbag_creation/CMakeFiles/rosbag_creation_generate_messages.dir/build
 .PHONY : rosbag_creation_generate_messages/fast
 
-src/CamIP.o: src/CamIP.cpp.o
+src/CameraInput.o: src/CameraInput.cpp.o
 
-.PHONY : src/CamIP.o
-
-# target to build an object file
-src/CamIP.cpp.o:
-	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/CamPub.dir/build.make rosbag_creation/CMakeFiles/CamPub.dir/src/CamIP.cpp.o
-	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/RadarPub.dir/build.make rosbag_creation/CMakeFiles/RadarPub.dir/src/CamIP.cpp.o
-.PHONY : src/CamIP.cpp.o
-
-src/CamIP.i: src/CamIP.cpp.i
-
-.PHONY : src/CamIP.i
-
-# target to preprocess a source file
-src/CamIP.cpp.i:
-	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/CamPub.dir/build.make rosbag_creation/CMakeFiles/CamPub.dir/src/CamIP.cpp.i
-	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/RadarPub.dir/build.make rosbag_creation/CMakeFiles/RadarPub.dir/src/CamIP.cpp.i
-.PHONY : src/CamIP.cpp.i
-
-src/CamIP.s: src/CamIP.cpp.s
-
-.PHONY : src/CamIP.s
-
-# target to generate assembly for a file
-src/CamIP.cpp.s:
-	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/CamPub.dir/build.make rosbag_creation/CMakeFiles/CamPub.dir/src/CamIP.cpp.s
-	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/RadarPub.dir/build.make rosbag_creation/CMakeFiles/RadarPub.dir/src/CamIP.cpp.s
-.PHONY : src/CamIP.cpp.s
-
-src/CameraPubNode.o: src/CameraPubNode.cpp.o
-
-.PHONY : src/CameraPubNode.o
+.PHONY : src/CameraInput.o
 
 # target to build an object file
-src/CameraPubNode.cpp.o:
-	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/CamPub.dir/build.make rosbag_creation/CMakeFiles/CamPub.dir/src/CameraPubNode.cpp.o
-.PHONY : src/CameraPubNode.cpp.o
+src/CameraInput.cpp.o:
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/CameraPublisher.dir/build.make rosbag_creation/CMakeFiles/CameraPublisher.dir/src/CameraInput.cpp.o
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/RadarPublisher.dir/build.make rosbag_creation/CMakeFiles/RadarPublisher.dir/src/CameraInput.cpp.o
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/FusionNode.dir/build.make rosbag_creation/CMakeFiles/FusionNode.dir/src/CameraInput.cpp.o
+.PHONY : src/CameraInput.cpp.o
 
-src/CameraPubNode.i: src/CameraPubNode.cpp.i
+src/CameraInput.i: src/CameraInput.cpp.i
 
-.PHONY : src/CameraPubNode.i
+.PHONY : src/CameraInput.i
 
 # target to preprocess a source file
-src/CameraPubNode.cpp.i:
-	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/CamPub.dir/build.make rosbag_creation/CMakeFiles/CamPub.dir/src/CameraPubNode.cpp.i
-.PHONY : src/CameraPubNode.cpp.i
+src/CameraInput.cpp.i:
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/CameraPublisher.dir/build.make rosbag_creation/CMakeFiles/CameraPublisher.dir/src/CameraInput.cpp.i
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/RadarPublisher.dir/build.make rosbag_creation/CMakeFiles/RadarPublisher.dir/src/CameraInput.cpp.i
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/FusionNode.dir/build.make rosbag_creation/CMakeFiles/FusionNode.dir/src/CameraInput.cpp.i
+.PHONY : src/CameraInput.cpp.i
 
-src/CameraPubNode.s: src/CameraPubNode.cpp.s
+src/CameraInput.s: src/CameraInput.cpp.s
 
-.PHONY : src/CameraPubNode.s
+.PHONY : src/CameraInput.s
 
 # target to generate assembly for a file
-src/CameraPubNode.cpp.s:
-	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/CamPub.dir/build.make rosbag_creation/CMakeFiles/CamPub.dir/src/CameraPubNode.cpp.s
-.PHONY : src/CameraPubNode.cpp.s
+src/CameraInput.cpp.s:
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/CameraPublisher.dir/build.make rosbag_creation/CMakeFiles/CameraPublisher.dir/src/CameraInput.cpp.s
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/RadarPublisher.dir/build.make rosbag_creation/CMakeFiles/RadarPublisher.dir/src/CameraInput.cpp.s
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/FusionNode.dir/build.make rosbag_creation/CMakeFiles/FusionNode.dir/src/CameraInput.cpp.s
+.PHONY : src/CameraInput.cpp.s
+
+src/CameraPublisherNode.o: src/CameraPublisherNode.cpp.o
+
+.PHONY : src/CameraPublisherNode.o
+
+# target to build an object file
+src/CameraPublisherNode.cpp.o:
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/CameraPublisher.dir/build.make rosbag_creation/CMakeFiles/CameraPublisher.dir/src/CameraPublisherNode.cpp.o
+.PHONY : src/CameraPublisherNode.cpp.o
+
+src/CameraPublisherNode.i: src/CameraPublisherNode.cpp.i
+
+.PHONY : src/CameraPublisherNode.i
+
+# target to preprocess a source file
+src/CameraPublisherNode.cpp.i:
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/CameraPublisher.dir/build.make rosbag_creation/CMakeFiles/CameraPublisher.dir/src/CameraPublisherNode.cpp.i
+.PHONY : src/CameraPublisherNode.cpp.i
+
+src/CameraPublisherNode.s: src/CameraPublisherNode.cpp.s
+
+.PHONY : src/CameraPublisherNode.s
+
+# target to generate assembly for a file
+src/CameraPublisherNode.cpp.s:
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/CameraPublisher.dir/build.make rosbag_creation/CMakeFiles/CameraPublisher.dir/src/CameraPublisherNode.cpp.s
+.PHONY : src/CameraPublisherNode.cpp.s
+
+src/FusionNode.o: src/FusionNode.cpp.o
+
+.PHONY : src/FusionNode.o
+
+# target to build an object file
+src/FusionNode.cpp.o:
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/FusionNode.dir/build.make rosbag_creation/CMakeFiles/FusionNode.dir/src/FusionNode.cpp.o
+.PHONY : src/FusionNode.cpp.o
+
+src/FusionNode.i: src/FusionNode.cpp.i
+
+.PHONY : src/FusionNode.i
+
+# target to preprocess a source file
+src/FusionNode.cpp.i:
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/FusionNode.dir/build.make rosbag_creation/CMakeFiles/FusionNode.dir/src/FusionNode.cpp.i
+.PHONY : src/FusionNode.cpp.i
+
+src/FusionNode.s: src/FusionNode.cpp.s
+
+.PHONY : src/FusionNode.s
+
+# target to generate assembly for a file
+src/FusionNode.cpp.s:
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/FusionNode.dir/build.make rosbag_creation/CMakeFiles/FusionNode.dir/src/FusionNode.cpp.s
+.PHONY : src/FusionNode.cpp.s
 
 src/Node.o: src/Node.cpp.o
 
@@ -965,8 +1010,9 @@ src/Node.o: src/Node.cpp.o
 
 # target to build an object file
 src/Node.cpp.o:
-	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/CamPub.dir/build.make rosbag_creation/CMakeFiles/CamPub.dir/src/Node.cpp.o
-	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/RadarPub.dir/build.make rosbag_creation/CMakeFiles/RadarPub.dir/src/Node.cpp.o
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/CameraPublisher.dir/build.make rosbag_creation/CMakeFiles/CameraPublisher.dir/src/Node.cpp.o
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/RadarPublisher.dir/build.make rosbag_creation/CMakeFiles/RadarPublisher.dir/src/Node.cpp.o
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/FusionNode.dir/build.make rosbag_creation/CMakeFiles/FusionNode.dir/src/Node.cpp.o
 .PHONY : src/Node.cpp.o
 
 src/Node.i: src/Node.cpp.i
@@ -975,8 +1021,9 @@ src/Node.i: src/Node.cpp.i
 
 # target to preprocess a source file
 src/Node.cpp.i:
-	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/CamPub.dir/build.make rosbag_creation/CMakeFiles/CamPub.dir/src/Node.cpp.i
-	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/RadarPub.dir/build.make rosbag_creation/CMakeFiles/RadarPub.dir/src/Node.cpp.i
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/CameraPublisher.dir/build.make rosbag_creation/CMakeFiles/CameraPublisher.dir/src/Node.cpp.i
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/RadarPublisher.dir/build.make rosbag_creation/CMakeFiles/RadarPublisher.dir/src/Node.cpp.i
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/FusionNode.dir/build.make rosbag_creation/CMakeFiles/FusionNode.dir/src/Node.cpp.i
 .PHONY : src/Node.cpp.i
 
 src/Node.s: src/Node.cpp.s
@@ -985,66 +1032,97 @@ src/Node.s: src/Node.cpp.s
 
 # target to generate assembly for a file
 src/Node.cpp.s:
-	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/CamPub.dir/build.make rosbag_creation/CMakeFiles/CamPub.dir/src/Node.cpp.s
-	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/RadarPub.dir/build.make rosbag_creation/CMakeFiles/RadarPub.dir/src/Node.cpp.s
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/CameraPublisher.dir/build.make rosbag_creation/CMakeFiles/CameraPublisher.dir/src/Node.cpp.s
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/RadarPublisher.dir/build.make rosbag_creation/CMakeFiles/RadarPublisher.dir/src/Node.cpp.s
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/FusionNode.dir/build.make rosbag_creation/CMakeFiles/FusionNode.dir/src/Node.cpp.s
 .PHONY : src/Node.cpp.s
 
-src/RadIP.o: src/RadIP.cpp.o
+src/PolarToCartConverter.o: src/PolarToCartConverter.cpp.o
 
-.PHONY : src/RadIP.o
-
-# target to build an object file
-src/RadIP.cpp.o:
-	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/CamPub.dir/build.make rosbag_creation/CMakeFiles/CamPub.dir/src/RadIP.cpp.o
-	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/RadarPub.dir/build.make rosbag_creation/CMakeFiles/RadarPub.dir/src/RadIP.cpp.o
-.PHONY : src/RadIP.cpp.o
-
-src/RadIP.i: src/RadIP.cpp.i
-
-.PHONY : src/RadIP.i
-
-# target to preprocess a source file
-src/RadIP.cpp.i:
-	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/CamPub.dir/build.make rosbag_creation/CMakeFiles/CamPub.dir/src/RadIP.cpp.i
-	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/RadarPub.dir/build.make rosbag_creation/CMakeFiles/RadarPub.dir/src/RadIP.cpp.i
-.PHONY : src/RadIP.cpp.i
-
-src/RadIP.s: src/RadIP.cpp.s
-
-.PHONY : src/RadIP.s
-
-# target to generate assembly for a file
-src/RadIP.cpp.s:
-	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/CamPub.dir/build.make rosbag_creation/CMakeFiles/CamPub.dir/src/RadIP.cpp.s
-	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/RadarPub.dir/build.make rosbag_creation/CMakeFiles/RadarPub.dir/src/RadIP.cpp.s
-.PHONY : src/RadIP.cpp.s
-
-src/RadarDataPubNode.o: src/RadarDataPubNode.cpp.o
-
-.PHONY : src/RadarDataPubNode.o
+.PHONY : src/PolarToCartConverter.o
 
 # target to build an object file
-src/RadarDataPubNode.cpp.o:
-	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/RadarPub.dir/build.make rosbag_creation/CMakeFiles/RadarPub.dir/src/RadarDataPubNode.cpp.o
-.PHONY : src/RadarDataPubNode.cpp.o
+src/PolarToCartConverter.cpp.o:
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/FusionNode.dir/build.make rosbag_creation/CMakeFiles/FusionNode.dir/src/PolarToCartConverter.cpp.o
+.PHONY : src/PolarToCartConverter.cpp.o
 
-src/RadarDataPubNode.i: src/RadarDataPubNode.cpp.i
+src/PolarToCartConverter.i: src/PolarToCartConverter.cpp.i
 
-.PHONY : src/RadarDataPubNode.i
+.PHONY : src/PolarToCartConverter.i
 
 # target to preprocess a source file
-src/RadarDataPubNode.cpp.i:
-	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/RadarPub.dir/build.make rosbag_creation/CMakeFiles/RadarPub.dir/src/RadarDataPubNode.cpp.i
-.PHONY : src/RadarDataPubNode.cpp.i
+src/PolarToCartConverter.cpp.i:
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/FusionNode.dir/build.make rosbag_creation/CMakeFiles/FusionNode.dir/src/PolarToCartConverter.cpp.i
+.PHONY : src/PolarToCartConverter.cpp.i
 
-src/RadarDataPubNode.s: src/RadarDataPubNode.cpp.s
+src/PolarToCartConverter.s: src/PolarToCartConverter.cpp.s
 
-.PHONY : src/RadarDataPubNode.s
+.PHONY : src/PolarToCartConverter.s
 
 # target to generate assembly for a file
-src/RadarDataPubNode.cpp.s:
-	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/RadarPub.dir/build.make rosbag_creation/CMakeFiles/RadarPub.dir/src/RadarDataPubNode.cpp.s
-.PHONY : src/RadarDataPubNode.cpp.s
+src/PolarToCartConverter.cpp.s:
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/FusionNode.dir/build.make rosbag_creation/CMakeFiles/FusionNode.dir/src/PolarToCartConverter.cpp.s
+.PHONY : src/PolarToCartConverter.cpp.s
+
+src/RadarInput.o: src/RadarInput.cpp.o
+
+.PHONY : src/RadarInput.o
+
+# target to build an object file
+src/RadarInput.cpp.o:
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/CameraPublisher.dir/build.make rosbag_creation/CMakeFiles/CameraPublisher.dir/src/RadarInput.cpp.o
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/RadarPublisher.dir/build.make rosbag_creation/CMakeFiles/RadarPublisher.dir/src/RadarInput.cpp.o
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/FusionNode.dir/build.make rosbag_creation/CMakeFiles/FusionNode.dir/src/RadarInput.cpp.o
+.PHONY : src/RadarInput.cpp.o
+
+src/RadarInput.i: src/RadarInput.cpp.i
+
+.PHONY : src/RadarInput.i
+
+# target to preprocess a source file
+src/RadarInput.cpp.i:
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/CameraPublisher.dir/build.make rosbag_creation/CMakeFiles/CameraPublisher.dir/src/RadarInput.cpp.i
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/RadarPublisher.dir/build.make rosbag_creation/CMakeFiles/RadarPublisher.dir/src/RadarInput.cpp.i
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/FusionNode.dir/build.make rosbag_creation/CMakeFiles/FusionNode.dir/src/RadarInput.cpp.i
+.PHONY : src/RadarInput.cpp.i
+
+src/RadarInput.s: src/RadarInput.cpp.s
+
+.PHONY : src/RadarInput.s
+
+# target to generate assembly for a file
+src/RadarInput.cpp.s:
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/CameraPublisher.dir/build.make rosbag_creation/CMakeFiles/CameraPublisher.dir/src/RadarInput.cpp.s
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/RadarPublisher.dir/build.make rosbag_creation/CMakeFiles/RadarPublisher.dir/src/RadarInput.cpp.s
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/FusionNode.dir/build.make rosbag_creation/CMakeFiles/FusionNode.dir/src/RadarInput.cpp.s
+.PHONY : src/RadarInput.cpp.s
+
+src/RadarPublisherNode.o: src/RadarPublisherNode.cpp.o
+
+.PHONY : src/RadarPublisherNode.o
+
+# target to build an object file
+src/RadarPublisherNode.cpp.o:
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/RadarPublisher.dir/build.make rosbag_creation/CMakeFiles/RadarPublisher.dir/src/RadarPublisherNode.cpp.o
+.PHONY : src/RadarPublisherNode.cpp.o
+
+src/RadarPublisherNode.i: src/RadarPublisherNode.cpp.i
+
+.PHONY : src/RadarPublisherNode.i
+
+# target to preprocess a source file
+src/RadarPublisherNode.cpp.i:
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/RadarPublisher.dir/build.make rosbag_creation/CMakeFiles/RadarPublisher.dir/src/RadarPublisherNode.cpp.i
+.PHONY : src/RadarPublisherNode.cpp.i
+
+src/RadarPublisherNode.s: src/RadarPublisherNode.cpp.s
+
+.PHONY : src/RadarPublisherNode.s
+
+# target to generate assembly for a file
+src/RadarPublisherNode.cpp.s:
+	cd /home/kpit/CamRarFusion/build && $(MAKE) -f rosbag_creation/CMakeFiles/RadarPublisher.dir/build.make rosbag_creation/CMakeFiles/RadarPublisher.dir/src/RadarPublisherNode.cpp.s
+.PHONY : src/RadarPublisherNode.cpp.s
 
 # Help Target
 help:
@@ -1055,6 +1133,7 @@ help:
 	@echo "... install/strip"
 	@echo "... list_install_components"
 	@echo "... test"
+	@echo "... CameraPublisher"
 	@echo "... rosbag_creation_genpy"
 	@echo "... rosbag_creation_generate_messages_py"
 	@echo "... install"
@@ -1069,7 +1148,7 @@ help:
 	@echo "... std_msgs_generate_messages_nodejs"
 	@echo "... std_msgs_generate_messages_lisp"
 	@echo "... sensor_msgs_generate_messages_eus"
-	@echo "... CamPub"
+	@echo "... RadarPublisher"
 	@echo "... sensor_msgs_generate_messages_cpp"
 	@echo "... geometry_msgs_generate_messages_py"
 	@echo "... std_msgs_generate_messages_cpp"
@@ -1095,7 +1174,6 @@ help:
 	@echo "... rosbag_creation_generate_messages_nodejs"
 	@echo "... std_srvs_generate_messages_cpp"
 	@echo "... rosgraph_msgs_generate_messages_lisp"
-	@echo "... RadarPub"
 	@echo "... std_srvs_generate_messages_nodejs"
 	@echo "... std_srvs_generate_messages_py"
 	@echo "... rosbag_creation_generate_messages_eus"
@@ -1106,23 +1184,30 @@ help:
 	@echo "... topic_tools_generate_messages_lisp"
 	@echo "... topic_tools_generate_messages_nodejs"
 	@echo "... topic_tools_generate_messages_py"
+	@echo "... FusionNode"
 	@echo "... rosgraph_msgs_generate_messages_eus"
 	@echo "... rosbag_creation_generate_messages"
-	@echo "... src/CamIP.o"
-	@echo "... src/CamIP.i"
-	@echo "... src/CamIP.s"
-	@echo "... src/CameraPubNode.o"
-	@echo "... src/CameraPubNode.i"
-	@echo "... src/CameraPubNode.s"
+	@echo "... src/CameraInput.o"
+	@echo "... src/CameraInput.i"
+	@echo "... src/CameraInput.s"
+	@echo "... src/CameraPublisherNode.o"
+	@echo "... src/CameraPublisherNode.i"
+	@echo "... src/CameraPublisherNode.s"
+	@echo "... src/FusionNode.o"
+	@echo "... src/FusionNode.i"
+	@echo "... src/FusionNode.s"
 	@echo "... src/Node.o"
 	@echo "... src/Node.i"
 	@echo "... src/Node.s"
-	@echo "... src/RadIP.o"
-	@echo "... src/RadIP.i"
-	@echo "... src/RadIP.s"
-	@echo "... src/RadarDataPubNode.o"
-	@echo "... src/RadarDataPubNode.i"
-	@echo "... src/RadarDataPubNode.s"
+	@echo "... src/PolarToCartConverter.o"
+	@echo "... src/PolarToCartConverter.i"
+	@echo "... src/PolarToCartConverter.s"
+	@echo "... src/RadarInput.o"
+	@echo "... src/RadarInput.i"
+	@echo "... src/RadarInput.s"
+	@echo "... src/RadarPublisherNode.o"
+	@echo "... src/RadarPublisherNode.i"
+	@echo "... src/RadarPublisherNode.s"
 .PHONY : help
 
 

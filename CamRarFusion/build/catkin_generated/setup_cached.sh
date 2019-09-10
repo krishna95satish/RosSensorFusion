@@ -7,4 +7,10 @@
 # new environment variables
 
 # modified environment variables
+export CMAKE_PREFIX_PATH="/home/kpit/CamRarFusion/devel:$CMAKE_PREFIX_PATH"
+export LD_LIBRARY_PATH="/home/kpit/CamRarFusion/devel/lib:$LD_LIBRARY_PATH"
+export PKG_CONFIG_PATH="/home/kpit/CamRarFusion/devel/lib/pkgconfig:$PKG_CONFIG_PATH"
 export PWD="/home/kpit/CamRarFusion/build"
+export PYTHONPATH="/home/kpit/CamRarFusion/devel/lib/python2.7/dist-packages:$PYTHONPATH"
+export ROSLISP_PACKAGE_DIRECTORIES="/home/kpit/CamRarFusion/devel/share/common-lisp"
+export ROS_PACKAGE_PATH="/home/kpit/CamRarFusion/src:$ROS_PACKAGE_PATH"

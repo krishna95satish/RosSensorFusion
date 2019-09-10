@@ -10,9 +10,9 @@ project(rosbag_creation)
 find_package(catkin REQUIRED COMPONENTS
   cv_bridge
   image_transport
-  OpenCV REQUIRED
+  #OpenCV REQUIRED
   sensor_msgs
-  genmsg
+  message_generation
   rosbag
   roscpp
   std_msgs
@@ -223,14 +223,17 @@ include_directories(
 #target_link_libraries(RosBagInput ${catkin_LIBRARIES} ${OpenCV_LIBS})
 #add_dependencies(RosBagInput ros_bag_generate_messages_cpp )
 #
-add_executable(CamPub src/Node.cpp src/CameraPubNode.cpp src/CamIP.cpp src/RadIP.cpp)
-target_link_libraries(CamPub ${catkin_LIBRARIES} ${OpenCV_LIBS})
-add_dependencies(CamPub ros_bag_generate_messages_cpp )
+add_executable(CameraPublisher src/Node.cpp src/CameraPublisherNode.cpp src/CameraInput.cpp src/RadarInput.cpp)
+target_link_libraries(CameraPublisher ${catkin_LIBRARIES} ${OpenCV_LIBS})
+add_dependencies(CameraPublisher ros_bag_generate_messages_cpp )
+#
+#
+#
+add_executable(RadarPublisher src/RadarPublisherNode.cpp src/Node.cpp src/CameraInput.cpp src/RadarInput.cpp)
+target_link_libraries(RadarPublisher ${catkin_LIBRARIES} ${OpenCV_LIBS})
+add_dependencies(RadarPublisher ros_bag_generate_messages_cpp )
+#
 
-
-
-add_executable(RadarPub src/RadarDataPubNode.cpp src/Node.cpp src/CamIP.cpp src/RadIP.cpp)
-target_link_libraries(RadarPub ${catkin_LIBRARIES} ${OpenCV_LIBS})
-add_dependencies(RadarPub ros_bag_generate_messages_cpp )
-
-
+add_executable(FusionNode src/Node.cpp src/FusionNode.cpp src/PolarToCartConverter.cpp src/CameraInput.cpp src/RadarInput.cpp)
+target_link_libraries(FusionNode ${catkin_LIBRARIES} ${OpenCV_LIBS})
+add_dependencies(FusionNode ros_bag_generate_messages_cpp )

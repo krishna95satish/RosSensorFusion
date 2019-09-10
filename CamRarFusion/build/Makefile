@@ -233,6 +233,19 @@ doxygen/fast:
 .PHONY : doxygen/fast
 
 #=============================================================================
+# Target rules for targets named CameraPublisher
+
+# Build rule for target.
+CameraPublisher: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 CameraPublisher
+.PHONY : CameraPublisher
+
+# fast build rule for target.
+CameraPublisher/fast:
+	$(MAKE) -f rosbag_creation/CMakeFiles/CameraPublisher.dir/build.make rosbag_creation/CMakeFiles/CameraPublisher.dir/build
+.PHONY : CameraPublisher/fast
+
+#=============================================================================
 # Target rules for targets named rosbag_creation_genpy
 
 # Build rule for target.
@@ -389,17 +402,17 @@ sensor_msgs_generate_messages_eus/fast:
 .PHONY : sensor_msgs_generate_messages_eus/fast
 
 #=============================================================================
-# Target rules for targets named CamPub
+# Target rules for targets named RadarPublisher
 
 # Build rule for target.
-CamPub: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 CamPub
-.PHONY : CamPub
+RadarPublisher: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 RadarPublisher
+.PHONY : RadarPublisher
 
 # fast build rule for target.
-CamPub/fast:
-	$(MAKE) -f rosbag_creation/CMakeFiles/CamPub.dir/build.make rosbag_creation/CMakeFiles/CamPub.dir/build
-.PHONY : CamPub/fast
+RadarPublisher/fast:
+	$(MAKE) -f rosbag_creation/CMakeFiles/RadarPublisher.dir/build.make rosbag_creation/CMakeFiles/RadarPublisher.dir/build
+.PHONY : RadarPublisher/fast
 
 #=============================================================================
 # Target rules for targets named sensor_msgs_generate_messages_cpp
@@ -701,19 +714,6 @@ rosgraph_msgs_generate_messages_lisp/fast:
 .PHONY : rosgraph_msgs_generate_messages_lisp/fast
 
 #=============================================================================
-# Target rules for targets named RadarPub
-
-# Build rule for target.
-RadarPub: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 RadarPub
-.PHONY : RadarPub
-
-# fast build rule for target.
-RadarPub/fast:
-	$(MAKE) -f rosbag_creation/CMakeFiles/RadarPub.dir/build.make rosbag_creation/CMakeFiles/RadarPub.dir/build
-.PHONY : RadarPub/fast
-
-#=============================================================================
 # Target rules for targets named std_srvs_generate_messages_nodejs
 
 # Build rule for target.
@@ -844,6 +844,19 @@ topic_tools_generate_messages_py/fast:
 .PHONY : topic_tools_generate_messages_py/fast
 
 #=============================================================================
+# Target rules for targets named FusionNode
+
+# Build rule for target.
+FusionNode: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 FusionNode
+.PHONY : FusionNode
+
+# fast build rule for target.
+FusionNode/fast:
+	$(MAKE) -f rosbag_creation/CMakeFiles/FusionNode.dir/build.make rosbag_creation/CMakeFiles/FusionNode.dir/build
+.PHONY : FusionNode/fast
+
+#=============================================================================
 # Target rules for targets named rosgraph_msgs_generate_messages_eus
 
 # Build rule for target.
@@ -887,6 +900,7 @@ help:
 	@echo "... doxygen"
 	@echo "... install/local"
 	@echo "... test"
+	@echo "... CameraPublisher"
 	@echo "... rosbag_creation_genpy"
 	@echo "... rosbag_creation_generate_messages_py"
 	@echo "... rosbag_creation_gennodejs"
@@ -899,7 +913,7 @@ help:
 	@echo "... std_msgs_generate_messages_nodejs"
 	@echo "... std_msgs_generate_messages_lisp"
 	@echo "... sensor_msgs_generate_messages_eus"
-	@echo "... CamPub"
+	@echo "... RadarPublisher"
 	@echo "... sensor_msgs_generate_messages_cpp"
 	@echo "... geometry_msgs_generate_messages_py"
 	@echo "... std_msgs_generate_messages_cpp"
@@ -923,7 +937,6 @@ help:
 	@echo "... rosbag_creation_generate_messages_nodejs"
 	@echo "... std_srvs_generate_messages_cpp"
 	@echo "... rosgraph_msgs_generate_messages_lisp"
-	@echo "... RadarPub"
 	@echo "... std_srvs_generate_messages_nodejs"
 	@echo "... std_srvs_generate_messages_py"
 	@echo "... rosbag_creation_generate_messages_eus"
@@ -934,6 +947,7 @@ help:
 	@echo "... topic_tools_generate_messages_lisp"
 	@echo "... topic_tools_generate_messages_nodejs"
 	@echo "... topic_tools_generate_messages_py"
+	@echo "... FusionNode"
 	@echo "... rosgraph_msgs_generate_messages_eus"
 	@echo "... rosbag_creation_generate_messages"
 .PHONY : help
