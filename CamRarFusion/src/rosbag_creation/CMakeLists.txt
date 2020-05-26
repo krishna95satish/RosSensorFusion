@@ -225,15 +225,15 @@ include_directories(
 #
 add_executable(CameraPublisher src/Node.cpp src/CameraPublisherNode.cpp src/CameraInput.cpp src/RadarInput.cpp)
 target_link_libraries(CameraPublisher ${catkin_LIBRARIES} ${OpenCV_LIBS})
-add_dependencies(CameraPublisher ros_bag_generate_messages_cpp )
+add_dependencies(CameraPublisher rosbag_creation_generate_messages_cpp )
 #
 #
 #
 add_executable(RadarPublisher src/RadarPublisherNode.cpp src/Node.cpp src/CameraInput.cpp src/RadarInput.cpp)
 target_link_libraries(RadarPublisher ${catkin_LIBRARIES} ${OpenCV_LIBS})
-add_dependencies(RadarPublisher ros_bag_generate_messages_cpp )
+add_dependencies(RadarPublisher rosbag_creation_generate_messages_cpp )
 #
 
 add_executable(FusionNode src/Node.cpp src/FusionNode.cpp src/PolarToCartConverter.cpp src/CameraInput.cpp src/RadarInput.cpp)
 target_link_libraries(FusionNode ${catkin_LIBRARIES} ${OpenCV_LIBS})
-add_dependencies(FusionNode ros_bag_generate_messages_cpp )
+add_dependencies(FusionNode rosbag_creation_generate_messages_cpp )
