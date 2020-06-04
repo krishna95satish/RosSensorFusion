@@ -10,13 +10,14 @@ project(rosbag_creation)
 find_package(catkin REQUIRED COMPONENTS
   cv_bridge
   image_transport
-  #OpenCV REQUIRED
   sensor_msgs
   message_generation
   rosbag
   roscpp
   std_msgs
 )
+
+find_package(OpenCV)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -201,6 +202,12 @@ include_directories(
 ## Testing ##
 #############
 
+catkin_add_gtest(PolartocartTest test/PolartocartTest.cpp src/PolarToCartConverter.cpp)
+target_link_libraries(PolartocartTest ${catkin_LIBRARIES})
+
+catkin_add_gtest(ROSBAGReadTest test/ROSBAGReadTest.cpp src/RadarInput.cpp src/CameraInput.cpp)
+target_link_libraries(ROSBAGReadTest ${catkin_LIBRARIES})
+
 ## Add gtest based cpp test target and link libraries
 # catkin_add_gtest(${PROJECT_NAME}-test test/test_rosbag_creation.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
@@ -210,30 +217,22 @@ include_directories(
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
 
-#add_executable(videoPublisherNode src/videoPublisherNode.cpp)
-#target_link_libraries(videoPublisherNode ${catkin_LIBRARIES} ${OpenCV_LIBS})
-#add_dependencies(videoPublisherNode ros_bag_generate_messages_cpp )
-
-#add_executable(rosBagReader src/rosBagReader.cpp)
-#target_link_libraries(rosBagReader ${catkin_LIBRARIES} ${OpenCV_LIBS})
-#add_dependencies(rosBagReader ros_bag_generate_messages_cpp )
-
-
-#add_executable(RosBagInput src/RosBagInput.cpp )
-#target_link_libraries(RosBagInput ${catkin_LIBRARIES} ${OpenCV_LIBS})
-#add_dependencies(RosBagInput ros_bag_generate_messages_cpp )
-#
-add_executable(CameraPublisher src/Node.cpp src/CameraPublisherNode.cpp src/CameraInput.cpp src/RadarInput.cpp)
+add_executable(CameraPublisher src/Node.cpp src/CameraPublisherNode.cpp src/CameraInput.cpp src/RadarInput.cpp src/Ros.cpp)
 target_link_libraries(CameraPublisher ${catkin_LIBRARIES} ${OpenCV_LIBS})
 add_dependencies(CameraPublisher rosbag_creation_generate_messages_cpp )
-#
-#
-#
-add_executable(RadarPublisher src/RadarPublisherNode.cpp src/Node.cpp src/CameraInput.cpp src/RadarInput.cpp)
+
+add_executable(RadarPublisher src/RadarPublisherNode.cpp src/Node.cpp src/CameraInput.cpp src/RadarInput.cpp src/Ros.cpp)
 target_link_libraries(RadarPublisher ${catkin_LIBRARIES} ${OpenCV_LIBS})
 add_dependencies(RadarPublisher rosbag_creation_generate_messages_cpp )
-#
 
-add_executable(FusionNode src/Node.cpp src/FusionNode.cpp src/PolarToCartConverter.cpp src/CameraInput.cpp src/RadarInput.cpp)
+add_executable(FusionNode src/Node.cpp src/FusionNode.cpp src/PolarToCartConverter.cpp src/CameraInput.cpp src/RadarInput.cpp src/Ros.cpp)
 target_link_libraries(FusionNode ${catkin_LIBRARIES} ${OpenCV_LIBS})
 add_dependencies(FusionNode rosbag_creation_generate_messages_cpp )
+
+add_executable(RadarInputCsvToRosbag src/RadarInputCsvToRosbagMain.cpp src/RadarInputCsvToRosbag.cpp src/Ros.cpp)
+target_link_libraries(RadarInputCsvToRosbag ${catkin_LIBRARIES})
+add_dependencies(RadarInputCsvToRosbag rosbag_creation_generate_messages_cpp )
+
+add_executable(CameraInputVideoToRosbag src/CameraInputVideoToRosbag.cpp src/CameraInputVideoToRosbagMain.cpp src/Ros.cpp)
+target_link_libraries(CameraInputVideoToRosbag ${catkin_LIBRARIES} ${OpenCV_LIBS})
+add_dependencies(CameraInputVideoToRosbag rosbag_creation_generate_messages_cpp )

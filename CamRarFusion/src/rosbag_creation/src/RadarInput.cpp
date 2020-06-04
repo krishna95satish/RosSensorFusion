@@ -5,37 +5,46 @@ void RadarInput::setFileName(const std::string fname) {
     fileName_ = fname;
 }
 
-bool RadarInput::isOpen() {
+RadarInput* RadarInput::RadarInputptr = NULL;
+
+bool RadarInput::open() {
     try {
-        ROS_INFO("file name is  [%s]", fileName_.c_str());
-        bagObj_.open(fileName_, rosbag::bagmode::Read);
-        return 1;
+        bag_.open(fileName_, rosbag::bagmode::Read);
+        statusFlag_ = true;
     }
     catch(rosbag::BagIOException& errMsg) {
-        ROS_INFO("file name is  [%s]", errMsg.what());
-        return 0;
+        ROS_INFO("Error is :  [%s]", errMsg.what());
+        statusFlag_ = false;
+    }
+    return statusFlag_;
+}
+
+RadarInput* RadarInput::newinstance() {
+    if (RadarInputptr == NULL) {
+        RadarInputptr = new RadarInput;
+    }
+    return RadarInputptr;
+}
+
+void RadarInput::read(const std::string topicNameInRosBag) {
+    topics_.push_back(topicNameInRosBag);
+    rosbag::View view(bag_, rosbag::TopicQuery(topics_));
+    for (auto rosBagConstMsg : rosbag::View(bag_)) {
+        radarFrame_  = rosBagConstMsg.instantiate<rosbag_creation::RadarMsg>();
+        if (radarFrame_  != NULL) {
+            radarFrames_.push_back(radarFrame_);
+        }
     }
 }
 
-bool RadarInput::readRadarData(const std::string topicNameInRosBag) {
-    topics_.push_back(topicNameInRosBag);
-    ROS_INFO("reading.");
-    ROS_INFO("topic name is [%s]", topics_);
-    rosbag::View view(bagObj_, rosbag::TopicQuery(topics_));
-    for (rosbag::MessageInstance const rosBagConstMsg : rosbag::View(bagObj_)) {
-        rosBagRadarData_  = rosBagConstMsg.instantiate<rosbag_creation::RadarMsg>();
-        if (rosBagRadarData_  != NULL) {
-            ROS_INFO("reading..... radar");
-            ROS_INFO("v name is [%d]", rosBagRadarData_->frame);
-            radarDataList_.push_back(rosBagRadarData_);
-        } else {
-            return 0;
-        }
+std::vector<rosbag_creation::RadarMsg::ConstPtr>& RadarInput::getData() {
+    return radarFrames_;
 }
+
+void RadarInput::close() {
+  bag_.close();
 }
-std::vector<rosbag_creation::RadarMsg::ConstPtr>& RadarInput::getMsgData() {
-    return radarDataList_;
-}
+
 RadarInput::~RadarInput() {
-    bagObj_.close();
+    delete(RadarInputptr);
 }

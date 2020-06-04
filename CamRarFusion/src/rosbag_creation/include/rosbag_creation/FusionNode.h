@@ -1,38 +1,39 @@
 // Copyright 2019 KPIT  [legal/copyright]
 
-#pragma once
+#ifndef CAMRARFUSION_SRC_ROSBAG_CREATION_INCLUDE_ROSBAG_CREATION_FUSIONNODE_H_
+#define CAMRARFUSION_SRC_ROSBAG_CREATION_INCLUDE_ROSBAG_CREATION_FUSIONNODE_H_
+
 #include <string>
+#include <queue>
 #include "rosbag_creation/Node.h"
 #include "rosbag_creation/RadarMsg.h"
 #include "PolarToCartConverter.h"
 
-
 class FusionNode : public Node {
  private:
-    bool imageRecivedFlag_{0};
-    bool radarRecivedFlag_{0};
-    std::string imageID_{0};
-    int radarID_{0};
-    ros::NodeHandle nodeHandler_;
-    ros::Subscriber msgSubscriber_;
-    image_transport::Subscriber imageTransporterSub_;
-    image_transport::Publisher imagePublisher_;
-    image_transport::ImageTransport imageTransporter_;
-    cv_bridge::CvImagePtr tempCameraBuffer_{nullptr};
-    cv_bridge::CvImagePtr processedImgData_{nullptr};
-    const std::string OPENCV_WINDOW = "Image window";
-    PolarToCartConverter polarToCartConverter_;
+    std::string currentFrameID_{0};
+    ros::NodeHandle node_;
+    ros::Subscriber subscribe_;
+    image_transport::Subscriber imageTransportSubcribe_;
+    image_transport::Publisher imagePublish_;
+    image_transport::ImageTransport imageTransport_;
+    cv_bridge::CvImagePtr openCvFrame_{nullptr};
+    PolarToCartConverter polarToCartesianConverter_;
+    cv_bridge::CvImagePtr firstFrame_;
+    std::queue<rosbag_creation::RadarMsg::ConstPtr> radarBuffer_;
+    std::queue<cv_bridge::CvImagePtr> frameBuffer_;
+    rosbag_creation::RadarMsg::ConstPtr currentRadarFrameID_{nullptr};
 
  public:
     FusionNode();
-    void finalPublisher();
-    void repeatTransmission();
-    void msgSubscriber();
-    void msgPublisher();
-    void plotting(const rosbag_creation::RadarMsg::ConstPtr& radar_msg);
-    int getMsgSize();
-    void goToNextMsg();
+    void subscribe();
+    void publish();
+    void synchronize();
+    void plot();
     void imageCallback(const sensor_msgs::Image::ConstPtr& cameraMsg);
     void radarCallback(const rosbag_creation::RadarMsg::ConstPtr& radarMsg);
+    void publishonedata();
     ~FusionNode() {}
 };
+
+#endif  // CAMRARFUSION_SRC_ROSBAG_CREATION_INCLUDE_ROSBAG_CREATION_FUSIONNODE_H_

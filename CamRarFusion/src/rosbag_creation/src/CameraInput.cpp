@@ -1,37 +1,57 @@
 // Copyright 2019 KPIT  [legal/copyright]
+
 #include "rosbag_creation/CameraInput.h"
 
 void CameraInput::setFileName(const std::string fname) {
     fileName_ = fname;
 }
 
-bool CameraInput::isOpen() {
+CameraInput* CameraInput::CameraInputptr = NULL;
+
+bool CameraInput::open() {
     try {
-        ROS_INFO("file name is  [%s]", fileName_.c_str());
-        bagObj_.open(fileName_, rosbag::bagmode::Read);
-        return 1;
+        bag_.open(fileName_, rosbag::bagmode::Read);
+        statusFlag_ = true;
     }
     catch(rosbag::BagIOException& errMsg) {
-        ROS_INFO("file name is  [%s]", errMsg.what());
-        return 0;
+        ROS_INFO("Error is :  [%s]", errMsg.what());
+        statusFlag_ = false;
+    }
+    return statusFlag_;
+}
+
+CameraInput* CameraInput::newinstance() {
+    if (CameraInputptr == NULL) {
+        CameraInputptr = new CameraInput;
+    }
+    return CameraInputptr;
+}
+
+void CameraInput::read(const std::string topicNameInRosBag) {
+    view_.addQuery(bag_, rosbag::TopicQuery(topicNameInRosBag));
+    iterator_ = view_.begin();
+}
+
+sensor_msgs::ImagePtr& CameraInput::getData() {
+    rosbag::MessageInstance const messageInstance = *iterator_;
+    cameraFrames_ = messageInstance.instantiate<sensor_msgs::Image>();
+    if (cameraFrames_) {
+        return(cameraFrames_);
     }
 }
 
-std::vector<sensor_msgs::ImagePtr>& CameraInput::readCamData(const std::string topicNameInRosBag) {
-    topics_.push_back(topicNameInRosBag);
-    ROS_INFO("topic name is [%s]", topics_);
-    rosbag::View view(bagObj_, rosbag::TopicQuery(topics_));
-    for (rosbag::MessageInstance const rosBagConstMsg : rosbag::View(bagObj_)) {
-        ROS_INFO("reading.....");
-        camImgMsg_ = rosBagConstMsg.instantiate<sensor_msgs::Image>();
-        if (camImgMsg_ != NULL) {
-            rosImgMsgList_.push_back(camImgMsg_);
-        }
+void CameraInput::nextFrame() {
+    if (++iterator_ == view_.end()) {
+        iterator_ = view_.begin();
+    } else {
+        ++iterator_;
+    }
 }
-return(rosImgMsgList_);
+
+void CameraInput::close() {
+    bag_.close();
 }
 
 CameraInput::~CameraInput() {
-    bagObj_.close();
+    delete(CameraInputptr);
 }
-

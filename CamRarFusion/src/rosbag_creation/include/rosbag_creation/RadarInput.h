@@ -1,31 +1,36 @@
 // Copyright 2019 KPIT  [legal/copyright]
-#pragma once
-#include "Input.h"
+
+#ifndef CAMRARFUSION_SRC_ROSBAG_CREATION_INCLUDE_ROSBAG_CREATION_RADARINPUT_H_
+#define CAMRARFUSION_SRC_ROSBAG_CREATION_INCLUDE_ROSBAG_CREATION_RADARINPUT_H_
+
 #include <vector>
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "Input.h"
 #include "ros/ros.h"
 
 class RadarInput : public Input {
+ private:
+    RadarInput() {}
+    static RadarInput *RadarInputptr;
+
  protected:
-    int canMsgCounter_ {0};
-    rosbag::Bag bagObj_;
-    rosbag_creation::RadarMsg::ConstPtr rosBagRadarData_;
-    std::vector<rosbag_creation::RadarMsg::ConstPtr> radarDataList_;
-    int vecCounter_ {0};
-    int vecSize_ {0};
-    int debugMode_;
-    int count_ {0};
+    rosbag::Bag bag_;
+    rosbag_creation::RadarMsg::ConstPtr radarFrame_;
+    std::vector<rosbag_creation::RadarMsg::ConstPtr> radarFrames_;
     std::string fileName_;
     std::vector<std::string> topics_{""};
+    bool statusFlag_;
+
  public:
-    RadarInput() {}
     void setFileName(const std::string fname);
-    bool isOpen();
-    bool readRadarData(const std::string topicNameInRosBag);
+    bool open();
+    void close();
+    void read(const std::string topicNameInRosBag);
+    std::vector<rosbag_creation::RadarMsg::ConstPtr>& getData();
+    static RadarInput* newinstance();
     ~RadarInput();
-    std::vector<rosbag_creation::RadarMsg::ConstPtr>& getMsgData();
 };
 
-
+#endif  // CAMRARFUSION_SRC_ROSBAG_CREATION_INCLUDE_ROSBAG_CREATION_RADARINPUT_H_

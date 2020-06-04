@@ -4,18 +4,22 @@
 
 cv_bridge::CvImagePtr& Node::RosImgToOpenCv(const sensor_msgs::Image::ConstPtr& rosImgMsg) {
     try {
-        cvImgPtr_ = cv_bridge::toCvCopy(rosImgMsg, sensor_msgs::image_encodings::BGR8);
-        return cvImgPtr_;
+        openCvFrame_ = cv_bridge::toCvCopy(rosImgMsg, sensor_msgs::image_encodings::BGR8);
     }
     catch (cv_bridge::Exception& e) {
         ROS_ERROR("Could not convert from '%s' to 'bgr8'.", rosImgMsg->encoding.c_str());
     }
+    return openCvFrame_;
 }
 
-void Node::getInputData() {}
-void Node::msgPublisher() {}
-void Node::msgSubscriber() {}
-void Node::process() {}
+void Node::getData() {}
+void Node::publish() {}
+void Node::subscribe() {}
 void Node::repeatTransmission() {}
-int Node::getMsgSize() {}
-void Node::goToNextMsg() {}
+int Node::length() {}
+void Node::nextFrame() {}
+
+Node::~Node() {
+    delete(cameraInput_);
+    delete(radarInput_);
+}

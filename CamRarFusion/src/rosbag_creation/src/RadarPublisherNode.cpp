@@ -1,66 +1,67 @@
 // Copyright 2019 KPIT  [legal/copyright]
+
 #include "rosbag_creation/RadarPublisherNode.h"
+#include "rosbag_creation/GlobalConsts.h"
+#include "rosbag_creation/Ros.h"
 
 RadarPublisherNode::RadarPublisherNode(const std::string fileName) {
-    RadarInputObj_.setFileName(fileName);
+    radarInput_->setFileName(fileName);
+    publish_ = node_.advertise<rosbag_creation::RadarMsg>(gRadarMsgname, gQueueSize);
 }
 
-void RadarPublisherNode::getInputData() {
-    if (RadarInputObj_.isOpen()) {
-        RadarInputObj_.readRadarData("/RadarDataTopic");
-        tempRadarData_ = RadarInputObj_.getMsgData();
+void RadarPublisherNode::getData() {
+    if (radarInput_->open()) {
+        radarInput_->read(gRadarTopicname);
+        tempRadarData_ = radarInput_->getData();
+        radarInput_->close();
     }
-    process();
 }
-void RadarPublisherNode::msgPublisher() {
-    genericPublisherObject_ = genericNodeHndl_.advertise<rosbag_creation::RadarMsg>("RadarMsg", gQueueSize);
-    ROS_INFO("size is [%d], [%d]", getMsgSize(), radarMsgCounter_);
-    if (radarMsgCounter_ != getMsgSize()) {
-        ROS_INFO("sending");
-        ros::Duration(5).sleep();
-        if(tempRadarData_[radarMsgCounter_]->frame > dummyMsgCounter_) {
-            dummyRadarData_.frame = dummyMsgCounter_;
-            dummyRadarData_.radarAngle = -100000;
-            dummyRadarData_.radarRange = -100000;
-            genericPublisherObject_.publish(dummyRadarData_);
+
+// Logic to compensate the missing frames in CSV Radar Data
+void RadarPublisherNode::publish() {
+    ROS_INFO("Publishing Radar Data");
+    if (radarMsgCounter_ != length()) {
+        if (tempRadarData_[radarMsgCounter_]->frame_ > dummyMsgCounter_) {
+            dummyRadarData_.frame_ = dummyMsgCounter_;
+            dummyRadarData_.radarAngle_ = gRadarplotconstant;
+            dummyRadarData_.radarRange_ = gRadarplotconstant;
+            publish_.publish(dummyRadarData_);
             nextDummyMsg();
         } else {
-        genericPublisherObject_.publish(tempRadarData_[radarMsgCounter_]);
-        ROS_INFO("count is [%d]", radarMsgCounter_);
+        publish_.publish(tempRadarData_[radarMsgCounter_]);
         nextDummyMsg();
-        goToNextMsg();
+        nextFrame();
         }
-        
-        
-
     } else {
         repeatTransmission();
     }
 }
+
 void RadarPublisherNode::nextDummyMsg() {
     dummyMsgCounter_++;
 }
 
-int RadarPublisherNode::getMsgSize() {
+int RadarPublisherNode::length() {
     return(tempRadarData_.size());
 }
-void RadarPublisherNode::goToNextMsg() {
+
+void RadarPublisherNode::nextFrame() {
     radarMsgCounter_++;
 }
 
 void RadarPublisherNode::repeatTransmission() {
-    radarMsgCounter_ = 0;
+    radarMsgCounter_ = gFrameReset;
 }
 
-
 int main(int argc, char** argv) {
-    ros::init(argc, argv, "RadarNode");
-    RadarPublisherNode cameraPubNode("/home/kpit/CamRarFusion/RosbagInput/radardata.bag");
-    cameraPubNode.getInputData();
-    ros::Rate loop_rate(gPubBaudRate);
+    Ros ros_;
+    ros_.initialize(argc, argv, gRadarPublisherNode);
+    RadarPublisherNode radarPublisherNode(gRadarNodeFile);
+    radarPublisherNode.getData();
+    ros::Rate loop_rate(gPublisherBaudRate);
     while (ros::ok()) {
-        cameraPubNode.msgPublisher();
-        ros::spinOnce();
+        radarPublisherNode.publish();
+        ros_.rate();
         loop_rate.sleep();
     }
     return 0;

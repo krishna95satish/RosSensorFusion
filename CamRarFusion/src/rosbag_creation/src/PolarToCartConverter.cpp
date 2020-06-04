@@ -7,7 +7,7 @@ PolarToCartConverter::PolarToCartConverter() {
     pitch_ = -0.023;
     yaw_ = 0;
     pixelWidth_ = pow(3.75, -6);
-    Pixelheight_ = pow(3.75, -6);
+    Pixelheight_ = pow(3.75, -6);  //
     imgCols_ = 1280;
     imgRows_ = 960;
     focalLength_ = pow(6, -3);
@@ -17,14 +17,14 @@ PolarToCartConverter::PolarToCartConverter() {
     cameraToRadarDist_ = 1.65;
 }
 
-std::vector<int> PolarToCartConverter::getImageCoordinates\
+std::vector<int> PolarToCartConverter::getImageCoordinates
     (const rosbag_creation::RadarMsg::ConstPtr& radar_msg) {
     std::vector<int> camCoord_;
     int u32_Cameraheight_ = height_;
     int  u32_Radarheight_ = radarheight_;
-    double  u32_RadarRange = radar_msg->radarRange;
+    double  u32_RadarRange = radar_msg->radarRange_;
     int  u32_cameraToRadarDist_ance = cameraToRadarDist_;
-    double  f32_RadarAngle = radar_msg->radarAngle;
+    double  f32_RadarAngle = radar_msg->radarAngle_;
     f32_RadarAngle = -f32_RadarAngle;
     int  s32_CameraOffset = lateralOffset_;
     int  s32_RadarOffset = radarLateralOffset_;
@@ -70,3 +70,4 @@ double PolarToCartConverter::realWorldWidthToImageCol(double f32_distance, doubl
     double f32_ImageCol = static_cast<float>((static_cast<float>(u32_SensorCols / 2) - f32_width_Pixel));
     return (f32_ImageCol);
 }
+

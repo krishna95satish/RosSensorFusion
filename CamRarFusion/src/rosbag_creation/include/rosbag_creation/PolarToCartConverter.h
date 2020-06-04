@@ -1,19 +1,11 @@
 // Copyright 2019 KPIT  [legal/copyright]
-#pragma once
-#include <sensor_msgs/image_encodings.h>
-#include <image_transport/image_transport.h>
-#include <opencv2/highgui/highgui.hpp>
-#include <opencv2/core/core.hpp>
-#include <cmath>
-#include <opencv2/imgproc/imgproc.hpp>
-#include <cv_bridge/cv_bridge.h>
-#include "rosbag_creation/RadarMsg.h"
-#include <fstream>
-#include <iostream>
-#include <sstream>
-#include <string>
+
+#ifndef CAMRARFUSION_SRC_ROSBAG_CREATION_INCLUDE_ROSBAG_CREATION_POLARTOCARTCONVERTER_H_
+#define CAMRARFUSION_SRC_ROSBAG_CREATION_INCLUDE_ROSBAG_CREATION_POLARTOCARTCONVERTER_H_
+
 #include <vector>
-#include <bits/stdc++.h>
+#include "Include.h"
+#include "rosbag_creation/RadarMsg.h"
 
 class PolarToCartConverter {
  protected:
@@ -36,3 +28,4 @@ class PolarToCartConverter {
     double realWorldWidthToImageCol(double f32_distance, double f32_width);
 };
 
+#endif  // CAMRARFUSION_SRC_ROSBAG_CREATION_INCLUDE_ROSBAG_CREATION_POLARTOCARTCONVERTER_H_

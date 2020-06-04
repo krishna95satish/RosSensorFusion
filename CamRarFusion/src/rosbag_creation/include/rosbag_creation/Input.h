@@ -1,5 +1,7 @@
 // Copyright 2019 KPIT  [legal/copyright]
-#pragma once
+
+#ifndef CAMRARFUSION_SRC_ROSBAG_CREATION_INCLUDE_ROSBAG_CREATION_INPUT_H_
+#define CAMRARFUSION_SRC_ROSBAG_CREATION_INCLUDE_ROSBAG_CREATION_INPUT_H_
 
 #include <ros/ros.h>
 #include <rosbag/bag.h>
@@ -10,11 +12,10 @@
 #include <vector>
 #include "rosbag_creation/RadarMsg.h"
 
-
 class Input {
  public:
-    virtual void setFileName(const std::string fname) = 0;
-    virtual bool isOpen() = 0;
-    virtual std::vector<sensor_msgs::ImagePtr>& readCamData(const std::string topicNameInRosBag) {}
-    virtual bool readRadarData(const std::string topicNameInRosBag) {}
+    virtual bool open() = 0;
+    virtual void read() {}
 };
+
+#endif  // CAMRARFUSION_SRC_ROSBAG_CREATION_INCLUDE_ROSBAG_CREATION_INPUT_H_

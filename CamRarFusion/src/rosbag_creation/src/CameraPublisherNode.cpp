@@ -1,56 +1,45 @@
 // Copyright 2019 <KPIT>
 
 #include "rosbag_creation/CameraPublisherNode.h"
+#include "rosbag_creation/GlobalConsts.h"
+#include "rosbag_creation/Ros.h"
 
 CameraPublisherNode::CameraPublisherNode(const std::string fileName) {
-    CameraInputObj_.setFileName(fileName);
+    cameraInput_->setFileName(fileName);
+    videoPublisher_ = imageTransport_.advertise(gCameraMsgname, gQueueSize);
 }
 
-void CameraPublisherNode::getInputData() {
-    if (CameraInputObj_.isOpen()) {
-        tempCamData_ = CameraInputObj_.readCamData(gtopicNameInRosBag);
+void CameraPublisherNode::getData() {
+    if (cameraInput_->open()) {
+        cameraInput_->read(gCameraBagName);
     }
 }
 
-void CameraPublisherNode::msgPublisher() {
-    ros::NodeHandle nodeHandler;
-    image_transport::Publisher imagePublisher;
-    image_transport::ImageTransport imageTransporter(nodeHandler);
-    imagePublisher = imageTransporter.advertise("CamMsg", gQueueSize);
-    ROS_INFO("size is [%d], [%d]", getMsgSize(), imgMsgCounter_);
-    if (imgMsgCounter_ != getMsgSize()) {
-        ROS_INFO("sending");
-        ros::Duration(1).sleep();
-        imagePublisher.publish(tempCamData_[imgMsgCounter_]);
-        ROS_INFO("count is [%d]", imgMsgCounter_);
-        goToNextMsg();
-    } else {
-        repeatTransmission();
-    }
+void CameraPublisherNode::publish() {
+    temporaryCameraData_ = cameraInput_->getData();
+    frameID_ = atoi(temporaryCameraData_->header.frame_id.c_str());
+    videoPublisher_.publish(temporaryCameraData_);
+    ROS_INFO("Publishing CameraData...");
+    nextFrame();
 }
 
-int CameraPublisherNode::getMsgSize() {
-    return(tempCamData_.size());
-}
-void CameraPublisherNode::goToNextMsg() {
-    imgMsgCounter_++;
+void CameraPublisherNode::close() {
+    cameraInput_->close();
 }
 
-void CameraPublisherNode::repeatTransmission() {
-    imgMsgCounter_ = 0;
-}
-
-void CameraPublisherNode::process() {
+void CameraPublisherNode::nextFrame() {
+    cameraInput_->nextFrame();
 }
 
 int main(int argc, char** argv) {
-    ros::init(argc, argv, "CamNode");
+    Ros ros_;
+    ros_.initialize(argc, argv, gCameraPublisherNode);
     CameraPublisherNode CameraPublisherNode(gCameraNodeFile);
-    CameraPublisherNode.getInputData();
-    ros::Rate loop_rate(gPubBaudRate);
+    CameraPublisherNode.getData();
+    ros::Rate loop_rate(gPublisherBaudRate);
     while (ros::ok()) {
-        CameraPublisherNode.msgPublisher();
-        ros::spinOnce();
+        CameraPublisherNode.publish();
+        ros_.rate();
         loop_rate.sleep();
     }
     return 0;

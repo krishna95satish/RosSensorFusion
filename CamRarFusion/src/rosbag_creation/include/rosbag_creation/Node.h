@@ -1,51 +1,40 @@
 // Copyright 2019 KPIT  [legal/copyright]
 
-#pragma once
+#ifndef CAMRARFUSION_SRC_ROSBAG_CREATION_INCLUDE_ROSBAG_CREATION_NODE_H_
+#define CAMRARFUSION_SRC_ROSBAG_CREATION_INCLUDE_ROSBAG_CREATION_NODE_H_
 
+#include <ros/ros.h>
+#include <image_transport/image_transport.h>
+#include <cv_bridge/cv_bridge.h>
 #include "Input.h"
-#include "Node.h"
 #include "CameraInput.h"
 #include "RadarInput.h"
-#include "GlobalConsts.h"
-#include "rosbag/bag.h"
-#include <rosbag/view.h>
-#include <ros/ros.h>
-#include <iostream>
-#include <vector>
-#include <cv_bridge/cv_bridge.h>
-#include <opencv2/highgui/highgui.hpp>
-#include <image_transport/image_transport.h>
+#include "Include.h"
 #include <string>
-#include <bits/stdc++.h>
-#include <cmath>
-#include <fstream>
-#include <opencv2/core/core.hpp>
-#include <opencv2/imgproc/imgproc.hpp>
-#include <sstream>
-#include <sensor_msgs/image_encodings.h>
+#include <vector>
 
 class Node {
  protected:
-    ros::NodeHandle genericNodeHndl_;
-    ros::Publisher genericPublisherObject_;
-    ros::Subscriber genericSubscriberObject_;
-    image_transport::ImageTransport imageTransportObj_;
-    image_transport::Publisher videoPubObj_;
+    ros::NodeHandle node_;
+    ros::Publisher publish_;
+    ros::Subscriber subscribe_;
+    image_transport::ImageTransport imageTransport_;
+    image_transport::Publisher videoPublisher_;
     std::vector<std::string> topics_{""};
-    cv_bridge::CvImagePtr cvImgPtr_;
-    sensor_msgs::ImagePtr rosImgMsg_{nullptr};
-    CameraInput CameraInputObj_;
-    RadarInput RadarInputObj_;
+    cv_bridge::CvImagePtr openCvFrame_;
 
  public:
-    Node():imageTransportObj_(genericNodeHndl_) {}
+    Node():imageTransport_(node_) {}
+    CameraInput *cameraInput_ = CameraInput::newinstance();
+    RadarInput *radarInput_ = RadarInput::newinstance();
     cv_bridge::CvImagePtr& RosImgToOpenCv(const sensor_msgs::Image::ConstPtr& rosImgMsg);
-    virtual void getInputData();
-    virtual void msgPublisher();
-    virtual void msgSubscriber();
+    virtual void getData();
+    virtual void publish();
+    virtual void subscribe();
     virtual void repeatTransmission();
-    virtual void process();
-    virtual int getMsgSize();
-    virtual void goToNextMsg();
-    virtual ~Node(){}
+    virtual int length();
+    virtual void nextFrame();
+    virtual ~Node();
 };
+
+#endif  // CAMRARFUSION_SRC_ROSBAG_CREATION_INCLUDE_ROSBAG_CREATION_NODE_H_

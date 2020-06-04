@@ -1,0 +1,8 @@
+<launch>
+	<node pkg="rosbag_creation" type="CameraPublisher" name="CameraPublisher" output="screen">
+    </node>
+    <node pkg="rosbag_creation" type="RadarPublisher" name="RadarPublisher" output="screen">
+    </node>
+    <node pkg="rosbag_creation" type="FusionNode" name="FusionNode" output="screen">
+    </node>
+</launch>
